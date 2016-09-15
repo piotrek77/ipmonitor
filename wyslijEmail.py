@@ -12,7 +12,7 @@ def wyslijEmail(do, temat, tresc):
   s = smtplib.SMTP_SSL(wyslijEmailParams.serwersmtp)
   s.login(wyslijEmailParams.login,wyslijEmailParams.haslo)
   s.sendmail(wyslijEmailParams.od, do, msg.as_string())
-  print(' ',do)
+  print('Email do ',do, ' temat: ', temat)
   s.quit
 
 
