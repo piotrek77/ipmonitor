@@ -9,6 +9,15 @@ import ipmonitorParams
 hosty = csv.reader(open('listaHostow.csv', newline=''), delimiter=';', quotechar='|')
 hosty2 = list(hosty)
 
+##funkcja zwraca ilosc poprawnych pingow
+def ping(adres, powtorz):
+  ile = 0
+  for i in range(powtorz):
+    resp2 = os.system('sudo ping -c 1 '+adres+' > /dev/null')
+    if resp2 == 0:
+      ile+=1
+  return ile
+
 def sprawdzacz():
 
   #while True:
@@ -22,18 +31,19 @@ def sprawdzacz():
     for rowek in hosty2:
       if rowek[0]!='adres':
         print(rowek)
-        resp = os.system('sudo ping -c 1 '+rowek[0]+' > /dev/null')
+        resp = ping(rowek[0],1)#os.system('sudo ping -c 1 '+rowek[0]+' > /dev/null')
         prev=stany[rowek[0]]
         #print('prev={}'.format(prev))
         stan = ''
-        if resp == 0:
+        if resp == 1:
           print(rowek[0], ' UP')
           stany[rowek[0]]= 1
           stan='UP'
         else:
-          print(rowek[0], ' DOWN')
-          stany[rowek[0]] =0
-          stan='DOWN'
+          if ping(rowek[0],4)==0:
+            print(rowek[0], ' DOWN')
+            stany[rowek[0]] =0
+            stan='DOWN'
         #sprawdzamy czy nastapila zmiana statusu
         #print('prev={} stany[rowek[0]]={} rowek[0]={}'.format(prev, stany[rowek[0]], rowek[0]))
         if (prev!=-1) & (prev != stany[rowek[0]]):
@@ -41,7 +51,7 @@ def sprawdzacz():
     time.sleep(5)
   
      
-    
+#print(ping('wp.pl',4))
 sprawdzacz()
 
 
