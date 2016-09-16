@@ -47,7 +47,11 @@ def sprawdzacz():
         #sprawdzamy czy nastapila zmiana statusu
         #print('prev={} stany[rowek[0]]={} rowek[0]={}'.format(prev, stany[rowek[0]], rowek[0]))
         if (prev!=-1) & (prev != stany[rowek[0]]):
-          wyslijEmail.wyslijEmail(ipmonitorParams.do, 'ipmonitor '+rowek[1]+' '+rowek[0]+' '+stan, '')
+          try:
+            wyslijEmail.wyslijEmail(ipmonitorParams.do, 'ipmonitor '+rowek[1]+' '+rowek[0]+' '+stan, '')
+          except:
+            print("Blad podczas wysylki email")
+
     time.sleep(5)
   
      

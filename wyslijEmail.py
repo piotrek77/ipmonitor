@@ -11,9 +11,14 @@ def wyslijEmail(do, temat, tresc):
   msg['From'] = wyslijEmailParams.od
   s = smtplib.SMTP_SSL(wyslijEmailParams.serwersmtp)
   s.login(wyslijEmailParams.login,wyslijEmailParams.haslo)
-  s.sendmail(wyslijEmailParams.od, do, msg.as_string())
-  print('Email do ',do, ' temat: ', temat)
-  s.quit
+  try:
+    s.sendmail(wyslijEmailParams.od, do, msg.as_string())
+  except:
+    print('Problem z wysylka email')
+  else:
+    print('Email do ',do, ' temat: ', temat)
+  finally:
+    s.quit
 
 
 
