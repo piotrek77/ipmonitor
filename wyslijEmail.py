@@ -14,9 +14,11 @@ def wyslijEmail(do, temat, tresc):
   try:
     s.sendmail(wyslijEmailParams.od, do, msg.as_string())
   except:
-    print('Problem z wysylka email')
+    #print('Problem z wysylka email')
+    return 'Problem z wysylka email'
   else:
-    print('Email do ',do, ' temat: ', temat)
+    #print('Email do ',do, ' temat: ', temat)
+    return 'Email do '+do+' temat: '+temat
   finally:
     s.quit
 
