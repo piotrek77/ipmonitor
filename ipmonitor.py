@@ -56,7 +56,7 @@ def ping(adres, powtorz):
   return ile
 
 def sprawdzacz():
-
+  stdscr.clear()
   #while True:
     #while True:
     #w pierwszej linii jest nagloweK
@@ -89,6 +89,7 @@ def sprawdzacz():
       #if rowek[0]!='adres':
       if 1==1:
         #print(rowek)
+#        stdscr.clear()
         stdscr.addstr(m.wiersz,0,m.adres)
         stdscr.addstr(m.wiersz,16,m.nazwa+'                       ')
         stdscr.addstr(m.wiersz,30,' ---- sprawdzam ----')
